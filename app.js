@@ -36,7 +36,7 @@ mongoose
       console.log("Database connection successful");
     })
   )
-  .catch((err) => {
-    console.error(err.message);
+  .catch(error => {
+    console.error(error.message);
     process.exit(1);
   });
