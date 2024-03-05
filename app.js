@@ -5,9 +5,6 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" assert { type: "json" };
 import { authRrouter } from "./routes/auth.js";
 import { foodRouter } from "./routes/foodRouter.js";
-dotenv.config();
-
-const databaseHost = process.env.DB_HOST;
 
 const app = express();
 
