@@ -38,9 +38,17 @@ export const registerUser = async (req, res) => {
 
   res.status(201).json({
     user: {
-      name: newUser.name,
-      email: newUser.email,
-      token: newUser.token,
+      name: user.name,
+      email: user.email,
+      blood: user.blood,
+      sex: user.sex,
+      height: user.height,
+      currentWeight: user.currentWeight,
+      desiredWeight: user.desiredWeight,
+      levelActivity: user.levelActivity,
+      avatarURL: user.avatarURL,
+      birthday: user.birthday,
+      token,
     },
   });
 };
