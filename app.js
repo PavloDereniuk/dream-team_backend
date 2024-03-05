@@ -4,11 +4,6 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" assert { type: "json" };
 import { authRrouter } from "./routes/auth.js";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
-
-const databaseHost = process.env.DB_HOST;
 
 const app = express();
 
@@ -32,19 +27,4 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-mongoose.set("strictQuery", true);
-
-mongoose
-  .connect(databaseHost)
-  .then(() => {
-    app.listen(3000, () => {
-      console.log("Database connection successful");
-      console.log("Server running. Use our API on port: 3000");
-    });
-  })
-  .catch((error) => {
-    console.log("error", error);
-    process.exit(1);
-  });
-
-// export default app;
+export default app;
