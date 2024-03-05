@@ -2,11 +2,12 @@
   "name": "dream-team_backend",
   "type": "module",
   "scripts": {
-    "start": "node ./app.js",
-    "dev": "nodemon ./app.js"
+    "start": "node ./server.js",
+    "dev": "nodemon ./server.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cloudinary": "^2.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.0",
     "express": "^4.18.2",
@@ -16,7 +17,8 @@
     "mongoose": "^6.9.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "nanoid": "^5.0.4"
+    "nanoid": "^5.0.4",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

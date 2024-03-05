@@ -1,10 +1,10 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json" assert { type: "json" };
 import { authRrouter } from "./routes/auth.js";
-import {foodRouter} from "./routes/foodRouter.js";
+import { foodRouter } from "./routes/foodRouter.js";
 dotenv.config();
 
 const databaseHost = process.env.DB_HOST;
@@ -14,7 +14,8 @@ const app = express();
 app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static("public"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/users", authRrouter);
 // app.use("/api/exercises", *******);
@@ -30,14 +31,4 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-mongoose
-  .connect(databaseHost)
-  .then(
-    app.listen(3000, () => {
-      console.log("Database connection successful");
-    })
-  )
-  .catch(error => {
-    console.error(error.message);
-    process.exit(1);
-  });
+export default app;
