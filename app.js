@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { authRrouter } from "./routes/auth.js";
+import {foodRouter} from "./routes/foodRouter.js";
 dotenv.config();
 
 const databaseHost = process.env.DB_HOST;
@@ -18,7 +19,7 @@ app.use(express.static("public"))
 app.use("/api/users", authRrouter);
 // app.use("/api/exercises", *******);
 // app.use("/api/filters", *******);
-// app.use("/api/products", *******);
+app.use("/api/products", foodRouter)
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
