@@ -8,7 +8,7 @@ const delDiaryExercises = async (req, res) => {
   const { id } = req.params;
   const idToRemove = new mongoose.Types.ObjectId(id);
   console.log("🚀 ~ delDiaryExercises ~ idToRemove:", idToRemove);
-  console.log("🚀 ~ delDiaryExercises ~ id:", id);
+  // console.log("🚀 ~ delDiaryExercises ~ id:", id);
 
   const diaryEntry = await Diary.findOneAndUpdate(
     {
@@ -21,7 +21,7 @@ const delDiaryExercises = async (req, res) => {
       },
     },
     { new: true }
-  ).populate("exercises.exerciseID");
+  );
 
   if (!diaryEntry) throw HttpError(404, "Exercise not found in diary");
 

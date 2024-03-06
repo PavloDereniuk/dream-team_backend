@@ -17,8 +17,9 @@ const addExercise = async (req, res, next) => {
     } else {
       const result = await Diary.findOneAndUpdate(
         { date, owner },
-        { $push: { exercises: { exerciseID, time, calories } } }
-      );
+        { $push: { exercises: { exerciseID, time, calories } } },
+        { upsert: true, new: true }
+      ).populate("exerciseID");
       res.status(200).json(result);
     }
   } catch (error) {

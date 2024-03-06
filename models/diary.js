@@ -102,7 +102,7 @@ const diarySchema = new Schema(
       },
     },
 
-    products: [{ addProduct }],
+    products: [addProduct],
 
     exercises: [addExercise],
   },
