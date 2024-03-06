@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { authRrouter } from "./routes/auth.js";
+import diaryRouter from "./routes/diaryRouter.js";
 dotenv.config();
 
 const databaseHost = process.env.DB_HOST;
@@ -13,12 +14,13 @@ const app = express();
 app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"))
+app.use(express.static("public"));
 
 app.use("/api/users", authRrouter);
 // app.use("/api/exercises", *******);
 // app.use("/api/filters", *******);
 // app.use("/api/products", *******);
+app.use("/api/diary", diaryRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
