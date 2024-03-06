@@ -1,14 +1,44 @@
+// import multer from "multer";
+// import { join, dirname } from "path";
+// import { fileURLToPath } from "url";
+
+// const __dirname = dirname(fileURLToPath(import.meta.url));
+// const tempDir = join(__dirname, "../", "temp");
+
+// const multerConfig = multer.diskStorage({
+//     destination: tempDir
+// });
+
+// const upload = multer({storage: multerConfig});
+
+// export {upload};
+
 import multer from "multer";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const tempDir = join(__dirname, "../", "temp");
 
-const multerConfig = multer.diskStorage({
-    destination: tempDir
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
-const upload = multer({storage: multerConfig});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: async (req, file) => {
+    return {
+      folder: "avatars",
+      allowed_formats: ["jpg", "png"],
+      public_id: req.user.id,
+      transformation: [
+        { width: 350, height: 350 },
+        { width: 700, height: 700 },
+      ],
+    };
+  },
+});
 
-export {upload};
+const upload = multer({ storage });
+
+export { upload };

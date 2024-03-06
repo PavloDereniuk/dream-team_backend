@@ -2,31 +2,47 @@
     "openapi": "3.0.1",
     "info": {
       "version": "1.0.0",
-      "title": "Swagger test",
-      "description": "Showing off swagger-ui-express",
+      "title": "PowerPulse Dream Team API",
+      "description": "API documentation for server",
       "license": {
         "name": "MIT",
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    "servers": [{ "url": "http://localhost:3000" }],
+    "servers": [
+      {"url": "https://dream-team-backend-10w1.onrender.com/api"},
+      {"url": "http://localhost:3000/api"}
+    ],
     "tags": [
       {
         "name": "Auth",
         "description": "Authorization endpoints"
+      },
+      {
+        "name": "Products",
+        "description": "Products endpoints"
+      },
+      {
+        "name": "Exercises",
+        "description": "Exercises endpoints"
+      },
+      {
+        "name": "Diary",
+        "description": "Diary endpoints"
+      },
+      {
+        "name": "Statistics",
+        "description": "Retrieve statistics for the application"
       }
     ],
     "paths": {
-      "/auth/register": {
+      "/users/register": {
         "post": {
           "tags": ["Auth"],
           "summary": "User registration",
           "parameters": [],
-          "security": [{ "Bearer": [] }],
           "requestBody": {
-            "description": "Registration's object",
+            "description": "Registration object",
             "required": true,
             "content": {
               "application/json": {
@@ -52,7 +68,7 @@
               "content": {}
             },
             "409": {
-              "description": "Provided email already exists",
+              "description": "Email in use",
               "content": {}
             }
           }
@@ -63,8 +79,13 @@
       "schemas": {
         "RegistrationRequest": {
           "type": "object",
-          "required": ["email", "password"],
+          "required": ["name", "email", "password"],
           "properties": {
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "name"
+            },
             "email": {
               "type": "string",
               "description": "User's email",
@@ -78,26 +99,23 @@
           }
         },
         "RegistrationResponse": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string",
-                "description": "User's email",
-                "format": "email"
-              },
-              "userId": {
-                "type": "number",
-                "description": "User's id",
-                "example": "32143232436545474"
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "description": "User's jwt token"
+                }
               }
             }
           },
-          "example": [
-            { "email": "1@gmail.com", "userId": "1" },
-            { "email": "2@gmail.com", "userId": "2" }
-          ]
+          "example": {
+            "data": {
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWZjNGZhNzc4MjE4MjEyY2RkZGI5YSIsImlhdCI6MTcwNDk2OTQ2NiwiZXhwIjoxNzA1MDU1ODY2fQ.mjIVXDKk3-W22awzxy3EWSgOBwrG8Rwnzs8UqpqmFww"
+            }
+          }
         }
       },
       "securitySchemes": {
