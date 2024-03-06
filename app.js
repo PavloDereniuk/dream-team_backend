@@ -1,10 +1,9 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json" assert { type: "json" };
 import { authRrouter } from "./routes/auth.js";
-import diaryRouter from "./routes/diaryRouter.js";
 dotenv.config();
 
 const databaseHost = process.env.DB_HOST;
@@ -20,7 +19,6 @@ app.use("/api/users", authRrouter);
 // app.use("/api/exercises", *******);
 // app.use("/api/filters", *******);
 // app.use("/api/products", *******);
-app.use("/api/diary", diaryRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });

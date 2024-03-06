@@ -1,4 +1,4 @@
-const contactsControllersWrapper = (controller) => {
+const controllersWrapper = (controller) => {
   return async (req, res, next) => {
     try {
       await controller(req, res, next);
@@ -8,4 +8,4 @@ const contactsControllersWrapper = (controller) => {
   };
 };
 
-export { contactsControllersWrapper };
+export { controllersWrapper };

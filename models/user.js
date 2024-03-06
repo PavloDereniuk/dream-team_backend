@@ -2,24 +2,68 @@ import { Schema, model } from "mongoose";
 import { handleMongooseError } from "../helpers/handleMongooseError.js";
 import Joi from "joi";
 
+const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: [true, "Name for user"],
+    },
+    email: {
+      type: String,
+      match: emailRegex,
+      required: [true, "Email is required"],
+      unique: true,
+    },
     password: {
       type: String,
       required: [true, "Set password for user"],
       minlength: 6,
     },
-    email: {
-      type: String,
-      required: [true, "Email is required"],
-      unique: true,
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net", "org", "co", "uk"] },
+    height: {
+      type: Number,
+      default: 0,
     },
-    subscription: {
+    currentWeight: {
+      type: Number,
+      default: 0,
+    },
+    desiredWeight: {
+      type: Number,
+      default: 0,
+    },
+    birthday: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
+      validate: {
+        validator: function (birthday) {
+          return (
+            isBefore(birthday, new Date()) &&
+            differenceInYears(new Date(), birthday) >= 18
+          );
+        },
+        message: "The user must be older than 18 years.",
+      },
+    },
+    blood: {
+      type: Number,
+      enum: [1, 2, 3, 4],
+    },
+    sex: {
+      type: String,
+      enum: ["male", "female"],
+    },
+    levelActivity: {
+      type: Number,
+      enum: [1, 2, 3, 4, 5],
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
     },
     token: {
       type: String,
@@ -27,44 +71,45 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      required: true,
+      default: null,
+    },
+    bmr: {
+      type: Number,
+      default: 0,
+    },
+    dailyActivity: {
+      type: Number,
+      default: 0,
     },
   },
   { versionKey: false, timestamps: true }
 );
 
 const registerSchema = Joi.object({
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net", "org", "co", "uk"] },
-    })
-    .required(),
+  name: Joi.string().required(),
+  email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string().min(6).required(),
-  subscription: Joi.string()
-    .valid("starter", "pro", "business")
-    .default("starter"),
 });
 
 const loginSchema = Joi.object({
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net", "org", "co", "uk"] },
-    })
-    .required(),
+  email: Joi.string().pattern(emailRegex).required(),
   password: Joi.string().min(6).required(),
 });
 
-const subscriptionShema = Joi.object({
-  subscription: Joi.string()
-    .valid("starter", "pro", "business")
-    .default("starter")
-    .required(),
+const updateUserSchema = Joi.object({
+  name: Joi.string().min(2).max(30).required(),
+  email: Joi.string().pattern(emailRegex).required(),
+  height: Joi.number().min(150).required(),
+  currentWeight: Joi.number().min(35).required(),
+  desiredWeight: Joi.number().min(35).required(),
+  birthday: Joi.date().required(),
+  blood: Joi.number().valid(1, 2, 3, 4).required(),
+  sex: Joi.string().valid("male", "female").required(),
+  levelActivity: Joi.number().valid(1, 2, 3, 4, 5).required(),
 });
 
 userSchema.post("save", handleMongooseError);
 
 const User = model("user", userSchema);
 
-export { registerSchema, loginSchema, subscriptionShema, User };
+export { User, registerSchema, loginSchema, updateUserSchema };
