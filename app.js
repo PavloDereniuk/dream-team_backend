@@ -5,6 +5,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" assert { type: "json" };
 import { authRrouter } from "./routes/auth.js";
 import { foodRouter } from "./routes/foodRouter.js";
+import diaryRouter from "./routes/diaryRouter.js";
 
 const app = express();
 
@@ -17,7 +18,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/users", authRrouter);
 // app.use("/api/exercises", *******);
 // app.use("/api/filters", *******);
-app.use("/api/products", foodRouter)
+app.use("/api/products", foodRouter);
+app.use("/api/diary", diaryRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });
