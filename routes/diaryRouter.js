@@ -1,19 +1,25 @@
 import express from "express";
-import createProduct from "../controllers/diaryControllers/addProductsController.js";
-import addExercise from "../controllers/diaryControllers/addExerciseController.js";
 import { authenticate } from "../middlewares/authenticate.js";
 import { validateBody } from "../helpers/validateBody.js";
 import { addProductSchema, exercisesSchema } from "../models/diary.js";
-import delDiaryExercises from "../controllers/diaryControllers/removeExercise.js";
-import delDiaryProduct from "../controllers/diaryControllers/removeProduct.js";
-import getEntry from "../controllers/diaryControllers/getEntry.js";
+import ctrl from "../controllers/diaryControllers/index.js";
 
 const diaryRouter = express.Router();
 
-diaryRouter.post("/product", authenticate, validateBody(addProductSchema), createProduct);
-diaryRouter.post("/exercise", authenticate, validateBody(exercisesSchema), addExercise);
-diaryRouter.delete("/exercise/:id", authenticate, delDiaryExercises);
-diaryRouter.delete("/product/:id", authenticate, delDiaryProduct);
-diaryRouter.get("/entry", authenticate, getEntry);
+diaryRouter.post(
+  "/product",
+  authenticate,
+  validateBody(addProductSchema),
+  ctrl.createProduct
+);
+diaryRouter.post(
+  "/exercise",
+  authenticate,
+  validateBody(exercisesSchema),
+  ctrl.addExercise
+);
+diaryRouter.delete("/exercise/:id", authenticate, ctrl.delDiaryExercises);
+diaryRouter.delete("/product/:id", authenticate, ctrl.delDiaryProduct);
+diaryRouter.get("/entry", authenticate, ctrl.getEntry);
 
-export default diaryRouter;
+export { diaryRouter };

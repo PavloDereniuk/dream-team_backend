@@ -1,7 +1,7 @@
 import { populate } from "dotenv";
 import { Diary } from "../../models/diary.js";
 
-const addExercise = async (req, res, next) => {
+export const addExercise = async (req, res, next) => {
   const {
     date,
     exercises: { exerciseID, time, calories },
@@ -28,4 +28,4 @@ const addExercise = async (req, res, next) => {
   }
 };
 
-export default addExercise;
+
