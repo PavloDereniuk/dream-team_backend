@@ -4,12 +4,10 @@ import mongoose from "mongoose";
 
 export const delDiaryProduct = async (req, res) => {
   const { _id: owner } = req.user;
-  console.log("🚀 ~ delDiaryExercises ~ owner:", owner);
   const { id } = req.params;
+  
   const idToRemove = new mongoose.Types.ObjectId(id);
-  console.log("🚀 ~ delDiaryExercises ~ idToRemove:", idToRemove);
-  console.log("🚀 ~ delDiaryExercises ~ id:", id);
-
+  
   const diaryEntry = await Diary.findOneAndUpdate(
     {
       owner,
