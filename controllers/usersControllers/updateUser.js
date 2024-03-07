@@ -10,7 +10,7 @@ export const updateUser = async (req, res) => {
     throw HttpError(400, "Email is already in use by another user");
   }
 
-  const { currentWeight, height, birthday, sex, levelActivity } = user;
+  const { currentWeight, height, birthday, sex, levelActivity } = req.body;
   const bmr = calculateBMR(currentWeight, height, birthday, sex, levelActivity);
 
   const upadateUserDate = await User.findByIdAndUpdate(
@@ -19,21 +19,19 @@ export const updateUser = async (req, res) => {
     { new: true }
   );
 
-  const upadateUser = {
-    name: upadateUserDate.name,
-    email: upadateUserDate.email,
-    blood: upadateUserDate.blood,
-    sex: upadateUserDate.sex,
-    height: upadateUserDate.height,
-    currentWeight: upadateUserDate.currentWeight,
-    desiredWeight: upadateUserDate.desiredWeight,
-    levelActivity: upadateUserDate.levelActivity,
-    avatarURL: upadateUserDate.avatarURL,
-    birthday: upadateUserDate.birthday,
-    bmr: upadateUserDate.bmr,
-  };
-
   res.status(200).json({
-    upadateUser,
+    user: {
+      name: upadateUserDate.name,
+      email: upadateUserDate.email,
+      blood: upadateUserDate.blood,
+      sex: upadateUserDate.sex,
+      height: upadateUserDate.height,
+      currentWeight: upadateUserDate.currentWeight,
+      desiredWeight: upadateUserDate.desiredWeight,
+      levelActivity: upadateUserDate.levelActivity,
+      avatarURL: upadateUserDate.avatarURL,
+      birthday: upadateUserDate.birthday,
+      bmr: upadateUserDate.bmr,
+    },
   });
 };
