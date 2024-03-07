@@ -36,7 +36,7 @@ export const loginUser = async (req, res) => {
       avatarURL: user.avatarURL,
       birthday: user.birthday,
       bmr: user.bmr,
-      token,
     },
+    token,
   });
 };

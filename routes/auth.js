@@ -26,6 +26,6 @@ authRrouter.patch(
   ctrl.updateUser
 );
 
-// authRrouter.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar)
+authRrouter.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar)
 
 export { authRrouter };

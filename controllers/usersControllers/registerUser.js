@@ -37,18 +37,20 @@ export const registerUser = async (req, res) => {
   await User.findByIdAndUpdate(newUser.id, { token });
 
   res.status(201).json({
-    user: {
-      name: user.name,
-      email: user.email,
-      blood: user.blood,
-      sex: user.sex,
-      height: user.height,
-      currentWeight: user.currentWeight,
-      desiredWeight: user.desiredWeight,
-      levelActivity: user.levelActivity,
-      avatarURL: user.avatarURL,
-      birthday: user.birthday,
-      token,
-    },
+    // user: {
+    //   name: newUser.name,
+    //   email: newUser.email,
+    //   blood: newUser.blood,
+    //   sex: newUser.sex,
+    //   height: newUser.height,
+    //   currentWeight: newUser.currentWeight,
+    //   desiredWeight: newUser.desiredWeight,
+    //   levelActivity: newUser.levelActivity,
+    //   avatarURL: newUser.avatarURL,
+    //   birthday: newUser.birthday,
+    // },
+    data: {
+      token
+    }
   });
 };
