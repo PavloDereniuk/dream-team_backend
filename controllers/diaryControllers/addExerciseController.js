@@ -20,7 +20,7 @@ const addExercise = async (req, res, next) => {
         { date, owner },
         { $push: { exercises: { exerciseID, time, calories } } },
         { upsert: true, new: true }
-      ).populate("exercises.exerciseID");
+      );
       res.status(200).json(result);
     }
   } catch (error) {
