@@ -3,12 +3,7 @@ import { User } from "../../models/user.js";
 import { HttpError } from "../../helpers/HttpError.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import path from "path";
-import { fileURLToPath } from "url";
 dotenv.config();
-
-// const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
 
 const tokenKey = process.env.SECRET_KEY;
 
@@ -37,18 +32,6 @@ export const registerUser = async (req, res) => {
   await User.findByIdAndUpdate(newUser.id, { token });
 
   res.status(201).json({
-    // user: {
-    //   name: newUser.name,
-    //   email: newUser.email,
-    //   blood: newUser.blood,
-    //   sex: newUser.sex,
-    //   height: newUser.height,
-    //   currentWeight: newUser.currentWeight,
-    //   desiredWeight: newUser.desiredWeight,
-    //   levelActivity: newUser.levelActivity,
-    //   avatarURL: newUser.avatarURL,
-    //   birthday: newUser.birthday,
-    // },
     data: {
       token
     }
