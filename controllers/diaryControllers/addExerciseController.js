@@ -1,3 +1,4 @@
+import { populate } from "dotenv";
 import { Diary } from "../../models/diary.js";
 
 const addExercise = async (req, res, next) => {
@@ -19,7 +20,7 @@ const addExercise = async (req, res, next) => {
         { date, owner },
         { $push: { exercises: { exerciseID, time, calories } } },
         { upsert: true, new: true }
-      ).populate("exerciseID");
+      ).populate("exercises.exerciseID");
       res.status(200).json(result);
     }
   } catch (error) {
