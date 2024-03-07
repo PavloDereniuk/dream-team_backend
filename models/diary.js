@@ -52,40 +52,6 @@ const isValidDate = (value) => {
   return isValid(parsedDate) && format(parsedDate, "dd-MM-yyyy") === value;
 };
 
-const addProduct = new Schema({
-  productID: {
-    type: Schema.Types.ObjectId,
-    ref: "product",
-  },
-  amount: {
-    type: Number,
-    required: true,
-    min: 1,
-  },
-  calories: {
-    type: Number,
-    required: true,
-    min: 1,
-  },
-});
-
-const addExercise = new Schema({
-  exerciseID: {
-    type: Schema.Types.ObjectId,
-    ref: "exercise",
-  },
-  time: {
-    type: Number,
-    required: true,
-    min: 1,
-  },
-
-  calories: {
-    type: Number,
-    required: true,
-    min: 1,
-  },
-});
 const diarySchema = new Schema(
   {
     owner: {
@@ -102,9 +68,44 @@ const diarySchema = new Schema(
       },
     },
 
-    products: [addProduct],
+    products: [
+      {
+        productID: {
+          type: Schema.Types.ObjectId,
+          ref: "product",
+        },
+        amount: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
+        calories: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
+      },
+    ],
 
-    exercises: [addExercise],
+    exercises: [
+      {
+        exerciseID: {
+          type: Schema.Types.ObjectId,
+          ref: "exercise",
+        },
+        time: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
+
+        calories: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
