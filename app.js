@@ -5,7 +5,9 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./swagger.json" assert { type: "json" };
 import { authRrouter } from "./routes/auth.js";
 import { foodRouter } from "./routes/foodRouter.js";
+import { trainingRouter } from "./routes/trainingRouter.js";
 import diaryRouter from "./routes/diaryRouter.js";
+
 
 const app = express();
 
@@ -16,7 +18,7 @@ app.use(express.static("public"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/users", authRrouter);
-// app.use("/api/exercises", *******);
+// app.use("/api/exercises", trainingRouter)
 // app.use("/api/filters", *******);
 app.use("/api/products", foodRouter);
 app.use("/api/diary", diaryRouter);
