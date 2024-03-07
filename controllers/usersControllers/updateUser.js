@@ -7,9 +7,9 @@ export const updateUser = async (req, res) => {
   const { currentWeight, height, birthday, sex, levelActivity } = updateDate;
   const bmr = calculateBMR(currentWeight, height, birthday, sex, levelActivity);
 
-  await User.findByIdAndUpdate(user.id, { ...updateDate, dailyActivity: 110, bmr });
+  const upadateUserDate = await User.findByIdAndUpdate(user.id, { ...updateDate, dailyActivity: 110, bmr });
 
   res.status(200).json({
-    message: "User date updated",
+    upadateUserDate,
   });
 };

@@ -18,7 +18,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/users", authRrouter);
 app.use("/api/exercises", trainingRouter);
-// app.use("/api/filters", *******);
 app.use("/api/products", foodRouter);
 app.use("/api/diary", diaryRouter);
 
