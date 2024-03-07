@@ -4,11 +4,9 @@ import mongoose from "mongoose";
 
 export const delDiaryExercises = async (req, res) => {
   const { _id: owner } = req.user;
-  console.log("🚀 ~ delDiaryExercises ~ owner:", owner);
   const { id } = req.params;
+
   const idToRemove = new mongoose.Types.ObjectId(id);
-  console.log("🚀 ~ delDiaryExercises ~ idToRemove:", idToRemove);
-  // console.log("🚀 ~ delDiaryExercises ~ id:", id);
 
   const diaryEntry = await Diary.findOneAndUpdate(
     {
@@ -27,5 +25,3 @@ export const delDiaryExercises = async (req, res) => {
 
   res.status(200).json({ message: "Exercise deleted from diary successfully" });
 };
-
-
