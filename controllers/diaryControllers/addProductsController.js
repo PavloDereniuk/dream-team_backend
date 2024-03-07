@@ -1,6 +1,6 @@
 import { Diary } from "../../models/diary.js";
 
-const createProduct = async (req, res, next) => {
+export const createProduct = async (req, res, next) => {
   const {
     date,
     products: { productID, amount, calories },
@@ -27,4 +27,4 @@ const createProduct = async (req, res, next) => {
   }
 };
 
-export default createProduct;
+

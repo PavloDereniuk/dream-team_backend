@@ -2,7 +2,7 @@ import { Diary } from "../../models/diary.js";
 import { HttpError } from "../../helpers/HttpError.js";
 import mongoose from "mongoose";
 
-const delDiaryProduct = async (req, res) => {
+export const delDiaryProduct = async (req, res) => {
   const { _id: owner } = req.user;
   console.log("🚀 ~ delDiaryExercises ~ owner:", owner);
   const { id } = req.params;
@@ -28,4 +28,3 @@ const delDiaryProduct = async (req, res) => {
   res.status(200).json({ message: "Product deleted from diary successfully" });
 };
 
-export default delDiaryProduct;
