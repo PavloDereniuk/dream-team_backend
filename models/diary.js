@@ -52,23 +52,6 @@ const isValidDate = (value) => {
   return isValid(parsedDate) && format(parsedDate, "dd-MM-yyyy") === value;
 };
 
-const addExercise = new Schema({
-  exerciseID: {
-    type: Schema.Types.ObjectId,
-    ref: "exercise",
-  },
-  time: {
-    type: Number,
-    required: true,
-    min: 1,
-  },
-
-  calories: {
-    type: Number,
-    required: true,
-    min: 1,
-  },
-});
 const diarySchema = new Schema(
   {
     owner: {
