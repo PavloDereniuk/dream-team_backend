@@ -13,6 +13,7 @@ export const getCurrentUser = async (req, res) => {
       levelActivity: user.levelActivity,
       avatarURL: user.avatarURL,
       birthday: user.birthday,
+      dailyActivity: user.dailyActivity,
       bmr: user.bmr,
     },
   });
