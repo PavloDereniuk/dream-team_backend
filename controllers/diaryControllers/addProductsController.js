@@ -17,7 +17,11 @@ export const createProduct = async (req, res, next) => {
     } else {
       const result = await Diary.findOneAndUpdate(
         { date, owner },
-        { $push: { products: { productID, amount, calories } } },
+
+        {
+          $push: { products: { productID, amount, calories } },
+          $inc: { consumedCalories: +calories },
+        },
         { new: true, upsert: true }
       ).populate("products.productID");
       res.status(200).json(result);
@@ -26,5 +30,3 @@ export const createProduct = async (req, res, next) => {
     next(error);
   }
 };
-
-

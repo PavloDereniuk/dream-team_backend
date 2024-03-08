@@ -1,4 +1,3 @@
-import { populate } from "dotenv";
 import { Diary } from "../../models/diary.js";
 
 export const addExercise = async (req, res, next) => {
@@ -18,7 +17,10 @@ export const addExercise = async (req, res, next) => {
     } else {
       const result = await Diary.findOneAndUpdate(
         { date, owner },
-        { $push: { exercises: { exerciseID, time, calories } } },
+        {
+          $push: { exercises: { exerciseID, time, calories } },
+          $inc: { burnedCalories: +calories, sportTime: +time },
+        },
         { upsert: true, new: true }
       );
       res.status(200).json(result);
@@ -27,5 +29,3 @@ export const addExercise = async (req, res, next) => {
     next(error);
   }
 };
-
-
