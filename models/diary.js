@@ -100,7 +100,6 @@ const diarySchema = new Schema(
         time: {
           type: Number,
           required: true,
-          min: 1,
         },
 
         calories: {
