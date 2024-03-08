@@ -68,6 +68,10 @@ const diarySchema = new Schema(
       },
     },
 
+    consumedCalories: { type: Number, default: 0 },
+    burnedCalories: { type: Number, default: 0 },
+    sportTime: { type: Number, default: 0 },
+
     products: [
       {
         productID: {
