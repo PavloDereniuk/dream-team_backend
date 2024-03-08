@@ -13,6 +13,14 @@ export const addExercise = async (req, res, next) => {
 
     if (!isDateExist) {
       const result = await Diary.create({ ...req.body, owner });
+
+      await Diary.findOneAndUpdate(
+        { date, owner },
+        {
+          $inc: { burnedCalories: +calories, sportTime: +time },
+        },
+        { upsert: true, new: true }
+      );
       res.status(200).json(result);
     } else {
       const result = await Diary.findOneAndUpdate(
