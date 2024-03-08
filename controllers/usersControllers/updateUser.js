@@ -13,16 +13,18 @@ export const updateUser = async (req, res) => {
   const { currentWeight, height, birthday, sex, levelActivity } = req.body;
   const bmr = calculateBMR(currentWeight, height, birthday, sex, levelActivity);
 
+  const dailyActivity = 110
+
+
   const upadateUserDate = await User.findByIdAndUpdate(
     id,
-    { ...req.body, bmr, bodyData: true },
+    { ...req.body, bmr, dailyActivity, bodyData: true },
     { new: true }
   );
 
   res.status(200).json({
     user: {
       name: upadateUserDate.name,
-      email: upadateUserDate.email,
       blood: upadateUserDate.blood,
       sex: upadateUserDate.sex,
       height: upadateUserDate.height,
@@ -31,6 +33,7 @@ export const updateUser = async (req, res) => {
       levelActivity: upadateUserDate.levelActivity,
       avatarURL: upadateUserDate.avatarURL,
       birthday: upadateUserDate.birthday,
+      dailyActivity: upadateUserDate.dailyActivity,
       bmr: upadateUserDate.bmr,
     },
   });
