@@ -154,8 +154,43 @@
         }
       }
     },
+    "/users/update": {
+      "patch": {
+        "tags": ["Auth"],
+        "summary": "User patch settings",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Settings' object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUsersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUsersResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
     "/users/avatars": {
-      "post": {
+      "patch": {
         "tags": ["Auth"],
         "summary": "User's avatar",
         "parameters": [],
@@ -432,23 +467,60 @@
           }
         }
       },
-      "UsersResponse": {
+      "UpdateUsersRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Name"
+          },
+          "height": {
+            "type": "number",
+            "description": "minimum 150(cm); required",
+            "example": 150
+          },
+          "currentWeight": {
+            "type": "number",
+            "description": "minimum 35(kg); required",
+            "example": 35
+          },
+          "desiredWeight": {
+            "type": "number",
+            "description": "minimum 35(kg); required",
+            "example": 35
+          },
+          "birthday": {
+            "type": "string",
+            "description": "iso string, must be older than 18 years;  required",
+            "example": "2005-01-11T00:00:00.000Z"
+          },
+          "blood": {
+            "type": "number",
+            "description": "allowed values 1, 2, 3, 4; require",
+            "example": 1
+          },
+          "sex": {
+            "type": "string",
+            "description": "allowed values \"male\", \"female\"; required",
+            "example": "male"
+          },
+          "levelActivity": {
+            "type": "number",
+            "description": "allowed values 1, 2, 3, 4, 5; required",
+            "example": 1
+          }
+        }
+      },
+      "UpdateUsersResponse": {
         "type": "object",
         "properties": {
           "user": {
             "type": "object",
             "properties": {
-              "email": {
-                "type": "string",
-                "description": "User's email"
-              },
               "name": {
                 "type": "string",
                 "description": "User's name"
-              },
-              "dailyCalories": {
-                "type": "number",
-                "description": ""
               },
               "dailyActivity": {
                 "type": "number",
@@ -482,6 +554,68 @@
                 "type": "number",
                 "description": "1, 2, 3, 4, 5"
               },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar url"
+              },
+              "bmr": {
+                "type": "number",
+                "description": ""
+              }
+            }
+          }
+        }
+      },
+      "UsersResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "dailyActivity": {
+                "type": "number",
+                "description": ""
+              },
+              "height": {
+                "type": "number",
+                "description": ""
+              },
+              "currentWeight": {
+                "type": "number",
+                "description": ""
+              },
+              "desiredWeight": {
+                "type": "number",
+                "description": ""
+              },
+              "birthday": {
+                "type": "string",
+                "description": ""
+              },
+              "blood": {
+                "type": "number",
+                "description": ""
+              },
+              "sex": {
+                "type": "string",
+                "description": "male or female"
+              },
+              "levelActivity": {
+                "type": "number",
+                "description": "1, 2, 3, 4, 5"
+              },
+              "avatarURL": {
+                "type": "string",
+                "description": "User's avatar url"
+              },
               "bmr": {
                 "type": "number",
                 "description": ""
@@ -497,7 +631,6 @@
           "user": {
             "name": "name",
             "email": "test@test.com",
-            "dailyCalories": 2200,
             "dailyActivity": 110,
             "height": 180,
             "currentWeight": 70,
@@ -506,6 +639,7 @@
             "blood": 1,
             "sex": "male",
             "levelActivity": 3,
+            "avatarURL": "https://res.cloudinary.com/durrb9z9q/image/upload/v1709993513/avatars/65eb63106e294ebc0dc61ae2.jpg",
             "bmr": 2345
           },
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWI2MzEwNmUyOTRlYmMwZGM2MWFlMiIsImlhdCI6MTcwOTk5MzMyOSwiZXhwIjoxNzEwMDc2MTI5fQ.Ng7K8CwCRsexPGSmbPSUYwPKIVGQTyFMlM8455kv7Wo"
