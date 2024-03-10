@@ -210,6 +210,168 @@
           }
         }
       }
+    },
+     "/diary/exercise": {
+      "post": {
+        "tags": ["Diary"],
+        "summary": "Diary entry exercise",
+        "parameters": [],
+        "requestBody": {
+          "description": "add exercise object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addExerciseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addExerciseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+            
+          }
+        }
+      }
+    },
+
+    "/diary/product": {
+      "post": {
+        "tags": ["Diary"],
+        "summary": "Diary entry product",
+        "parameters": [],
+        "requestBody": {
+          "description": "add product object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addProductRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/addProductResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/exercise/:id":{
+      "delete":{
+        "tags": ["Diary"],
+         "summary": "Diary delete exercise",
+        "parameters": [{"in":"string", "required": true,"name":"id"}],
+        "responses":{
+          
+          "200": {
+            "description": "Exercise deleted from diary successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/delExerciseResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Exercise not found in diary"
+                 },
+                 "400": {
+            "description": "Bad request (invalid request body)"
+            
+          }
+        }
+        
+      }
+    },
+     "/product/:id":{
+      "delete":{
+        "tags": ["Diary"],
+         "summary": "Diary delete product",
+        "parameters": [{"in":"string", "required": true,"name":"id"}],
+        "responses":{
+          
+          "200": {
+            "description": "Product deleted from diary successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/delProductResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found in diary"
+                 },
+                 "400": {
+            "description": "Bad request (invalid request body)"
+            
+          }
+        }
+        
+      }
+    },
+    "/entry":{
+      "get":{
+        "tags":["Diary"],
+        "summary": "Diary entry ",
+        "requestBody": {
+          "description": "get diary entry",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/diaryEntryeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/diaryEntrytResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid date format)",
+            "content": {}
+          },
+          "404":{
+            "description":"for this date no entry"          }
+        }
+        
+      }
     }
   },
   "components": {
@@ -348,6 +510,419 @@
           },
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWI2MzEwNmUyOTRlYmMwZGM2MWFlMiIsImlhdCI6MTcwOTk5MzMyOSwiZXhwIjoxNzEwMDc2MTI5fQ.Ng7K8CwCRsexPGSmbPSUYwPKIVGQTyFMlM8455kv7Wo"
         }
+      },
+         "addExerciseRequest": {
+        "type": "object",
+        "required": ["date", "exercises", "exerciseID"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "date of entry",
+            "example": "22-03-2024"
+          },
+          "exercises": {
+            "type": "object",
+            "required": ["exerciseID", "time", "calories"],
+            "properties": {
+              "exerciseID": {
+                "type": "string",
+                "description": "date of entry",
+                "example": "64f2458d6f67bc34bae4f86d"
+              },
+              "time": {
+                "type": "string",
+                "description": "time sport",
+                "example": "6"
+              },
+              "calories": {
+                "type": "string",
+                "description": "calories burned",
+                "example": "100"
+              }
+            }
+          }
+        }
+      },
+
+      "addExerciseResponse": {
+        "type": "object",
+
+        "example": {
+          "_id": "65eab6816fcca1a5f529c300",
+          "owner": "65e585c815811863f8acd028",
+          "date": "14-03-3004",
+          "consumedCalories": 200,
+          "burnedCalories": 500,
+          "sportTime": 35,
+          "products": [
+            {
+              "productID": "5d51694902b2373622ff5773",
+              "amount": 7,
+              "calories": 100,
+              "_id": "65eab6de9afdb1eb9926efbe"
+            },
+            {
+              "productID": "5d51694902b2373622ff5773",
+              "amount": 7,
+              "calories": 100,
+              "_id": "65eab6e19afdb1eb9926efc7"
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb3c6b0141879375ced4d3"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb3c6d0141879375ced4dd"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb3c6f0141879375ced4e9"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb456f243855f9fb73971d"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65ec820b85f45de0da6905e6"
+            }
+          ],
+          "createdAt": "2024-03-08T06:56:01.542Z",
+          "updatedAt": "2024-03-09T15:36:43.775Z"
+        }
+      },
+
+      "addProductRequest": {
+        "type": "object",
+        "required": ["date", "product", "productID"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "date of entry",
+            "example": "22-03-2024"
+          },
+          "products": {
+            "type": "object",
+            "required": ["productID", "amount", "calories"],
+            "properties": {
+              "productID": {
+                "type": "string",
+                "description": "date of entry",
+                "example": "5d51694902b2373622ff5773"
+              },
+              "amount": {
+                "type": "string",
+                "description": "gramm product",
+                "example": "6"
+              },
+              "calories": {
+                "type": "string",
+                "description": "calories condumed",
+                "example": "100"
+              }
+            }
+          }
+        }
+      },
+
+      "addProductResponse": {
+        "type": "object",
+        "example": {
+          "_id": "65eab6816fcca1a5f529c300",
+          "owner": "65e585c815811863f8acd028",
+          "date": "14-03-3004",
+          "consumedCalories": 300,
+          "burnedCalories": 600,
+          "sportTime": 42,
+          "products": [
+            {
+              "productID": {
+                "_id": "5d51694902b2373622ff5773",
+                "weight": 100,
+                "calories": 340,
+                "category": "dairy",
+                "title": "Danbo cheese",
+                "groupBloodNotAllowed": {
+                  "1": true,
+                  "2": true,
+                  "3": false,
+                  "4": false
+                }
+              },
+              "amount": 7,
+              "calories": 100,
+              "_id": "65eab6de9afdb1eb9926efbe"
+            },
+            {
+              "productID": {
+                "_id": "5d51694902b2373622ff5773",
+                "weight": 100,
+                "calories": 340,
+                "category": "dairy",
+                "title": "Danbo cheese",
+                "groupBloodNotAllowed": {
+                  "1": true,
+                  "2": true,
+                  "3": false,
+                  "4": false
+                }
+              },
+              "amount": 7,
+              "calories": 100,
+              "_id": "65eab6e19afdb1eb9926efc7"
+            },
+            {
+              "productID": {
+                "_id": "5d51694902b2373622ff5773",
+                "weight": 100,
+                "calories": 340,
+                "category": "dairy",
+                "title": "Danbo cheese",
+                "groupBloodNotAllowed": {
+                  "1": true,
+                  "2": true,
+                  "3": false,
+                  "4": false
+                }
+              },
+              "amount": 7,
+              "calories": 100,
+              "_id": "65ecbdaff46fe48c28675928"
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb3c6b0141879375ced4d3"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb3c6d0141879375ced4dd"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb3c6f0141879375ced4e9"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65eb456f243855f9fb73971d"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65ec820b85f45de0da6905e6"
+            },
+            {
+              "exerciseID": "64f2458d6f67bc34bae4f86d",
+              "time": 7,
+              "calories": 100,
+              "_id": "65ec8d9ce12cb7396f68c2cf"
+            }
+          ],
+          "createdAt": "2024-03-08T06:56:01.542Z",
+          "updatedAt": "2024-03-09T19:51:11.423Z"
+        }
+      },
+      "delExerciseResponse":{
+        "type":"object",
+        "example":{ "message": "Exercise deleted from diary successfully" }
+      },
+       "delProductResponse":{
+        "type":"object",
+        "example":{ "message": "Product deleted from diary successfully" }
+      },
+      "diaryEntryeRequest":{
+        "type": "object",
+        "required": ["date"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "date of entry",
+            "example": "22-03-2024"
+          }}
+      },
+      "diaryEntrytResponse":{
+        "type":"object",
+        "example":{
+    "_id": "65eab6816fcca1a5f529c300",
+    "owner": "65e585c815811863f8acd028",
+    "date": "14-03-3004",
+    "consumedCalories": 300,
+    "burnedCalories": 600,
+    "sportTime": 42,
+    "products": [
+        {
+            "productID": {
+                "_id": "5d51694902b2373622ff5773",
+                "weight": 100,
+                "calories": 340,
+                "category": "dairy",
+                "title": "Danbo cheese",
+                "groupBloodNotAllowed": {
+                    "1": true,
+                    "2": true,
+                    "3": false,
+                    "4": false
+                }
+            },
+            "amount": 7,
+            "calories": 100,
+            "_id": "65eab6de9afdb1eb9926efbe"
+        },
+        {
+            "productID": {
+                "_id": "5d51694902b2373622ff5773",
+                "weight": 100,
+                "calories": 340,
+                "category": "dairy",
+                "title": "Danbo cheese",
+                "groupBloodNotAllowed": {
+                    "1": true,
+                    "2": true,
+                    "3": false,
+                    "4": false
+                }
+            },
+            "amount": 7,
+            "calories": 100,
+            "_id": "65eab6e19afdb1eb9926efc7"
+        },
+        {
+            "productID": {
+                "_id": "5d51694902b2373622ff5773",
+                "weight": 100,
+                "calories": 340,
+                "category": "dairy",
+                "title": "Danbo cheese",
+                "groupBloodNotAllowed": {
+                    "1": true,
+                    "2": true,
+                    "3": false,
+                    "4": false
+                }
+            },
+            "amount": 7,
+            "calories": 100,
+            "_id": "65ecbdaff46fe48c28675928"
+        }
+    ],
+    "exercises": [
+        {
+            "exerciseID": {
+                "_id": "64f2458d6f67bc34bae4f86d",
+                "bodyPart": "upper legs",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0130.gif",
+                "name": "bench hip extension",
+                "target": "glutes",
+                "burnedCalories": 164,
+                "time": 3
+            },
+            "time": 7,
+            "calories": 100,
+            "_id": "65eb3c6b0141879375ced4d3"
+        },
+        {
+            "exerciseID": {
+                "_id": "64f2458d6f67bc34bae4f86d",
+                "bodyPart": "upper legs",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0130.gif",
+                "name": "bench hip extension",
+                "target": "glutes",
+                "burnedCalories": 164,
+                "time": 3
+            },
+            "time": 7,
+            "calories": 100,
+            "_id": "65eb3c6d0141879375ced4dd"
+        },
+        {
+            "exerciseID": {
+                "_id": "64f2458d6f67bc34bae4f86d",
+                "bodyPart": "upper legs",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0130.gif",
+                "name": "bench hip extension",
+                "target": "glutes",
+                "burnedCalories": 164,
+                "time": 3
+            },
+            "time": 7,
+            "calories": 100,
+            "_id": "65eb3c6f0141879375ced4e9"
+        },
+        {
+            "exerciseID": {
+                "_id": "64f2458d6f67bc34bae4f86d",
+                "bodyPart": "upper legs",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0130.gif",
+                "name": "bench hip extension",
+                "target": "glutes",
+                "burnedCalories": 164,
+                "time": 3
+            },
+            "time": 7,
+            "calories": 100,
+            "_id": "65eb456f243855f9fb73971d"
+        },
+        {
+            "exerciseID": {
+                "_id": "64f2458d6f67bc34bae4f86d",
+                "bodyPart": "upper legs",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0130.gif",
+                "name": "bench hip extension",
+                "target": "glutes",
+                "burnedCalories": 164,
+                "time": 3
+            },
+            "time": 7,
+            "calories": 100,
+            "_id": "65ec820b85f45de0da6905e6"
+        },
+        {
+            "exerciseID": {
+                "_id": "64f2458d6f67bc34bae4f86d",
+                "bodyPart": "upper legs",
+                "equipment": "body weight",
+                "gifUrl": "https://ftp.goit.study/img/power-pulse/gifs/0130.gif",
+                "name": "bench hip extension",
+                "target": "glutes",
+                "burnedCalories": 164,
+                "time": 3
+            },
+            "time": 7,
+            "calories": 100,
+            "_id": "65ec8d9ce12cb7396f68c2cf"
+        }
+    ],
+    "createdAt": "2024-03-08T06:56:01.542Z",
+    "updatedAt": "2024-03-09T19:51:11.423Z"
+}
       }
     },
     "securitySchemes": {
