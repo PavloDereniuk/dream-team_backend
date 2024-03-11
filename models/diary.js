@@ -36,7 +36,7 @@ const exercisesSchema = Joi.object({
     exerciseID: Joi.string().required().messages({
       "any.required": "Missing required exerciseId field",
     }),
-    time: Joi.number().min(1).required().messages({
+    time: Joi.number().required().messages({
       "any.required": "Missing required time field",
       "number.min": "Time must be a number greater than or equal to 1",
     }),
