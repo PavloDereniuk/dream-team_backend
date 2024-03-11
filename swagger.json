@@ -348,19 +348,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
           }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {}
-        },
-        "404": {
-          "description": "Not found",
-          "content": {}
-        },
-        "500": {
-          "description": "Server error",
-          "content": {}
         }
       }
     },
@@ -1381,13 +1381,13 @@
           }
         ]
       }
-    }
-  },
-  "securitySchemes": {
-    "Bearer": {
-      "type": "http",
-      "scheme": "bearer",
-      "bearerFormat": "JWT"
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
   }
 }
