@@ -11,12 +11,9 @@ export const exerciseAll = async (req, res) => {
     ],
   };
 
-  console.log("Query:", searchQuery);
-
   const dataUser = await Exercise.find(searchQuery).exec();
 
   const numberProductsBase = dataUser.length;
-  console.log("Number of Products:", numberProductsBase);
 
   res.status(200).json(dataUser);
 };

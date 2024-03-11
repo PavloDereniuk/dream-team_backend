@@ -1,16 +1,12 @@
 import { Product } from "../../models/productsModel.js";
 
-// Обробка Get-запитів для філтрації продуктів
 const getProductsFromAllFilters = async (req, res) => {
   const { category, title, filter } = req.query;
   const userBlood = req.user.blood;
-  console.log('userBlood', userBlood);
   let userSearchProducts = [];
   let numberProducts = 0;
   let groupBlood;
 
-  console.log("Received parameters - title:", title, "category:", category, "filter:", filter);
-  console.log("query = ", req.query);
 
   switch (userBlood) {
     case 1:
@@ -29,7 +25,6 @@ const getProductsFromAllFilters = async (req, res) => {
       groupBlood = "groupBloodNotAllowed.1";
   }
 
-  console.log(groupBlood)
 
   const allQuery = {
     ...(title && { title: { $regex: title, $options: "i" } }),
@@ -37,7 +32,6 @@ const getProductsFromAllFilters = async (req, res) => {
     ...(filter && { filter }),
   };
 
-  console.log('allQuery', allQuery)
 
   const recomendedProducs = {
     [groupBlood]: true,
@@ -69,7 +63,6 @@ const getProductsFromAllFilters = async (req, res) => {
       query = { ...allQuery };
   }
 
-  console.log("query ->", query);
 
   userSearchProducts = await Product.find(query).exec();
   numberProducts = userSearchProducts.length;
