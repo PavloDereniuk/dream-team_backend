@@ -282,19 +282,19 @@
         "parameters": [
           {
             "in": "query",
-            "name": "Products title",
+            "name": "title",
             "type": "string",
             "description": "Search product by title"
           },
           {
             "in": "query",
-            "name": "Categories type",
+            "name": "category",
             "type": "string",
             "description": "Categoris type from list"
           },
           {
             "in": "query",
-            "name": "Recomendetion params",
+            "name": "filter",
             "type": "string",
             "description": "Recomended or not recomended products filter"
           }
@@ -325,15 +325,15 @@
         }
       }
     },
-    "/exercises/:query": {
+    "/exercises/{query}": {
       "get": {
         "tags": ["Exercises"],
         "summary": "Get all exercise",
         "security": [{ "Bearer": [] }],
         "parameters": [
           {
-            "in": "query",
-            "name": "Categories title",
+            "in": "path",
+            "name":"query",
             "type": "string",
             "description": "Search exercise by category name"
           }
@@ -364,15 +364,15 @@
         }
       }
     },
-    "/exercise/filter/:query": {
+    "/exercises/filter/{query}": {
       "get": {
         "tags": ["Exercises"],
-        "summary": "All exercise by filter(body part/equipment/muscles",
+        "summary": "All exercise by filter(body parts/equipment/muscles",
         "security": [{ "Bearer": [] }],
         "parameters": [
           {
-            "in": "query",
-            "name": "Filter params",
+            "in": "path",
+            "name":"query",
             "type": "string",
             "description": "Filter title for exercises list"
           }
@@ -407,6 +407,7 @@
       "post": {
         "tags": ["Diary"],
         "summary": "Diary entry exercise",
+        "security": [{ "Bearer": [] }],
         "parameters": [],
         "requestBody": {
           "description": "add exercise object",
@@ -441,6 +442,7 @@
       "post": {
         "tags": ["Diary"],
         "summary": "Diary entry product",
+        "security": [{ "Bearer": [] }],
         "parameters": [],
         "requestBody": {
           "description": "add product object",
@@ -472,11 +474,12 @@
       }
     },
 
-    "/exercise/:id": {
+    "/diary/exercise/{id}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Diary delete exercise",
-        "parameters": [{ "in": "string", "required": true, "name": "id" }],
+        "security": [{ "Bearer": [] }],
+        "parameters": [{ "in": "path", "required": true, "name": "id" }],
         "responses": {
           "200": {
             "description": "Exercise deleted from diary successfully",
@@ -497,11 +500,12 @@
         }
       }
     },
-    "/product/:id": {
+    "/diary/product/{id}": {
       "delete": {
         "tags": ["Diary"],
         "summary": "Diary delete product",
-        "parameters": [{ "in": "string", "required": true, "name": "id" }],
+        "security": [{ "Bearer": [] }],
+        "parameters": [{ "in": "path", "required": true, "name": "id" }],
         "responses": {
           "200": {
             "description": "Product deleted from diary successfully",
@@ -522,10 +526,12 @@
         }
       }
     },
-    "/entry": {
+    "/diary/entry": {
       "get": {
         "tags": ["Diary"],
         "summary": "Diary entry ",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "get diary entry",
           "required": true,
