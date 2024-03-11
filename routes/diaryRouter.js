@@ -6,20 +6,10 @@ import ctrl from "../controllers/diaryControllers/index.js";
 
 const diaryRouter = express.Router();
 
-diaryRouter.post(
-  "/product",
-  authenticate,
-  validateBody(addProductSchema),
-  ctrl.createProduct
-);
-diaryRouter.post(
-  "/exercise",
-  authenticate,
-  validateBody(exercisesSchema),
-  ctrl.addExercise
-);
+diaryRouter.post("/product", authenticate, validateBody(addProductSchema), ctrl.createProduct);
+diaryRouter.post("/exercise", authenticate, validateBody(exercisesSchema), ctrl.addExercise);
 diaryRouter.delete("/exercise/:id", authenticate, ctrl.delDiaryExercises);
 diaryRouter.delete("/product/:id", authenticate, ctrl.delDiaryProduct);
-diaryRouter.get("/entry", authenticate, ctrl.getEntry);
+diaryRouter.get("/entry:date", authenticate, ctrl.getEntry);
 
 export { diaryRouter };
