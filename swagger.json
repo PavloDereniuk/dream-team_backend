@@ -29,10 +29,6 @@
     {
       "name": "Diary",
       "description": "Diary endpoints"
-    },
-    {
-      "name": "Statistics",
-      "description": "Retrieve statistics for the application"
     }
   ],
   "paths": {
@@ -105,7 +101,7 @@
             "description": "Bad request (invalid request body)",
             "content": {}
           },
-          "404": {
+          "401": {
             "description": "Email or password is wrong",
             "content": {}
           }
@@ -638,9 +634,9 @@
             "birthday": "2005-01-11T00:00:00.000Z",
             "blood": 1,
             "sex": "male",
-            "levelActivity": 3,
+            "levelActivity": 1,
             "avatarURL": "https://res.cloudinary.com/durrb9z9q/image/upload/v1709993513/avatars/65eb63106e294ebc0dc61ae2.jpg",
-            "bmr": 2345
+            "bmr": 2200
           },
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWI2MzEwNmUyOTRlYmMwZGM2MWFlMiIsImlhdCI6MTcwOTk5MzMyOSwiZXhwIjoxNzEwMDc2MTI5fQ.Ng7K8CwCRsexPGSmbPSUYwPKIVGQTyFMlM8455kv7Wo"
         }
