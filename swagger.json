@@ -526,23 +526,13 @@
         }
       }
     },
-    "/diary/entry": {
+    "/diary/entry/{date}": {
       "get": {
         "tags": ["Diary"],
         "summary": "Diary entry ",
-        "parameters": [],
+        "parameters": [{ "in": "path", "required": true, "name": "date" }],
         "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "get diary entry",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/diaryEntryeRequest"
-              }
-            }
-          }
-        },
+        
         "responses": {
           "200": {
             "description": "Successful operation",
