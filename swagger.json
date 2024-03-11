@@ -325,14 +325,15 @@
         }
       }
     },
-    "/exercises/:query": {
+    "/exercises/{query}": {
       "get": {
         "tags": ["Exercises"],
         "summary": "Get all exercise",
         "security": [{ "Bearer": [] }],
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
+            "name":"query",
             "type": "string",
             "description": "Search exercise by category name"
           }
@@ -363,14 +364,15 @@
         }
       }
     },
-    "/exercise/filter/:query": {
+    "/exercises/filter/{query}": {
       "get": {
         "tags": ["Exercises"],
-        "summary": "All exercise by filter(body part/equipment/muscles",
+        "summary": "All exercise by filter(body parts/equipment/muscles",
         "security": [{ "Bearer": [] }],
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
+            "name":"query",
             "type": "string",
             "description": "Filter title for exercises list"
           }
