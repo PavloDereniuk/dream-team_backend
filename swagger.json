@@ -282,19 +282,19 @@
         "parameters": [
           {
             "in": "query",
-            "name": "Products title",
+            "name": "title",
             "type": "string",
             "description": "Search product by title"
           },
           {
             "in": "query",
-            "name": "Categories type",
+            "name": "category",
             "type": "string",
             "description": "Categoris type from list"
           },
           {
             "in": "query",
-            "name": "Recomendetion params",
+            "name": "filter",
             "type": "string",
             "description": "Recomended or not recomended products filter"
           }
@@ -333,7 +333,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "Categories title",
             "type": "string",
             "description": "Search exercise by category name"
           }
@@ -372,7 +371,6 @@
         "parameters": [
           {
             "in": "query",
-            "name": "Filter params",
             "type": "string",
             "description": "Filter title for exercises list"
           }
