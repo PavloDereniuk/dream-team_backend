@@ -283,19 +283,28 @@
           {
             "in": "query",
             "name": "title",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["langoustine", "Rose hip", "Cheese Arla Natura Light", "sangria"]
+            },
             "description": "Search product by title"
           },
           {
             "in": "query",
             "name": "category",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["fish","berries", "dairy", "alcoholic drinks"]
+            },
             "description": "Categoris type from list"
           },
           {
             "in": "query",
             "name": "filter",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["all", "recomended", "not-recomended"]
+            },
             "description": "Recomended or not recomended products filter"
           }
         ],
@@ -334,7 +343,10 @@
           {
             "in": "path",
             "name":"query",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["chest", "body weight", "delts"]
+            },
             "description": "Search exercise by category name"
           }
         ],
@@ -373,7 +385,10 @@
           {
             "in": "path",
             "name":"query",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["body parts", "equipment", "muscles"]
+            },
             "description": "Filter title for exercises list"
           }
         ],
