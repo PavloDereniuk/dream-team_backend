@@ -5,63 +5,22 @@ const getProductsFromAllFilters = async (req, res) => {
   const userBlood = req.user.blood;
   let userSearchProducts = [];
   let numberProducts = 0;
-  let groupBlood;
+  const bloodGroups = {
+  1: "groupBloodNotAllowed.1",
+  2: "groupBloodNotAllowed.2",
+  3: "groupBloodNotAllowed.3",
+  4: "groupBloodNotAllowed.4",
+};
+
+  let groupBlood = bloodGroups[userBlood] || "groupBloodNotAllowed.1";
 
 
-  switch (userBlood) {
-    case 1:
-      groupBlood = "groupBloodNotAllowed.1";
-      break;
-    case 2:
-      groupBlood = "groupBloodNotAllowed.2";
-      break;
-    case 3:
-      groupBlood = "groupBloodNotAllowed.3";
-      break;
-    case 4:
-      groupBlood = "groupBloodNotAllowed.4";
-      break;
-    default:
-      groupBlood = "groupBloodNotAllowed.1";
-  }
-
-
-  const allQuery = {
+  const query = {
     ...(title && { title: { $regex: title, $options: "i" } }),
     ...(category && { category }),
-    ...(filter && { filter }),
+    ...(filter !== 'all' && {[groupBlood]:filter === 'recomended'?true:{$ne:true}}),
   };
 
-
-  const recomendedProducs = {
-    [groupBlood]: true,
-    ...(title && { title: { $regex: title, $options: "i" } }),
-    ...(category && { category }),
-    ...(filter && { filter }),
-  };
-
-  const notRecomendedProducs = {
-    [groupBlood]: { $ne: true },
-    ...(title && { title: { $regex: title, $options: "i" } }),
-    ...(category && { category }),
-    ...(filter && { filter }),
-  };
-
-  let query = {};
-
-  switch (filter) {
-    case 'all':
-      query = { ...allQuery };
-      break;
-    case 'recomended':
-      query = { ...recomendedProducs };
-      break;
-    case 'not-recomended':
-      query = {...notRecomendedProducs};
-      break;
-    default:
-      query = { ...allQuery };
-  }
 
 
   userSearchProducts = await Product.find(query).exec();
