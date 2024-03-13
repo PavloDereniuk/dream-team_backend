@@ -116,4 +116,11 @@ const diarySchema = new Schema(
 diarySchema.post("save", handleMongooseError);
 const Diary = model("diary", diarySchema);
 
-export { Diary, addProductSchema, exercisesSchema };
+const getByDate = Joi.object({
+  date: Joi.string().pattern(dateRegex).required().messages({
+    "any.required": "Missing required date field",
+    "string.pattern.base": "Invalid date format. Please use the format DD-MM-YYYY.",
+  }),
+});
+
+export { Diary, addProductSchema, exercisesSchema, getByDate };
