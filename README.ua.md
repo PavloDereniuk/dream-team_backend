@@ -36,9 +36,9 @@
 - Павло Деренюк - Тимлід / Розробник
     * [GitHub](https://github.com/PavloDereniuk)
     * [LinkedIn](https://www.linkedin.com/in/pavlo-dereniuk-507336154/)
-- Oleksandr Vasilaki - Розробник
+- Олександр Василакі - Розробник
     * [GitHub](https://github.com/AVasilaki)
-    * [LinkedIn]()
-- Oleksandr - Розробник
+    * [LinkedIn](https://www.linkedin.com/in/oleksandr-vasylaki-6858992a1/)
+- Олександр Шепель  - Розробник
     * [GitHub](https://github.com/fhlare)
-    * [LinkedIn]()
+    * [LinkedIn](https://www.linkedin.com/in/oleksandr-shepel/)
