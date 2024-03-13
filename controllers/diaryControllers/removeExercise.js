@@ -18,9 +18,9 @@ export const delDiaryExercises = async (req, res) => {
 
   const targetObject = findObjectById(exercises, targetId);
 
-  const calories = targetObject ? targetObject.calories : null;
+  const calories = targetObject ? targetObject.calories : 0;
 
-  const time = targetObject ? targetObject.time : null;
+  const time = targetObject ? targetObject.time : 0;
 
   const diaryEntry = await Diary.findOneAndUpdate(
     {
