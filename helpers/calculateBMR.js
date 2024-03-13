@@ -1,6 +1,6 @@
+import { activityLevelFactor, sexValue } from "./patterns.js";
+
 const calculateBMR = (currentWeight, height, birthday, sex, levelActivity) => {
-    const activityLevelFactor = { 1: 1.2, 2: 1.375, 3: 1.55, 4: 1.725, 5: 1.9 };
-    const sexValue = { male: { factor: 5 }, female: { factor: -161 } };
 
     const birthdayDate = new Date(birthday);
     const currentDate = new Date();

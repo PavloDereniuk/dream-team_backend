@@ -3,6 +3,7 @@ import Joi from "joi";
 import { handleMongooseError } from "../helpers/handleMongooseError.js";
 import { parse, isValid, format } from "date-fns";
 
+
 const dateRegex = /^(\d{2})-(\d{2})-(\d{4})$/;
 
 const addProductSchema = Joi.object({
