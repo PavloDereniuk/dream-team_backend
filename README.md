@@ -38,7 +38,7 @@ For comprehensive API documentation or do some testing, please consult the [Swag
     * [LinkedIn](https://www.linkedin.com/in/pavlo-dereniuk-507336154/)
 - Oleksandr Vasilaki - Developer
     * [GitHub](https://github.com/AVasilaki)
-    * [LinkedIn]()
-- Oleksandr - Developer
+    * [LinkedIn](https://www.linkedin.com/in/oleksandr-vasylaki-6858992a1/)
+- Oleksandr Shepel - Developer
     * [GitHub](https://github.com/fhlare)
-    * [LinkedIn]()
+    * [LinkedIn](https://www.linkedin.com/in/oleksandr-shepel/)
