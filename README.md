@@ -4,7 +4,7 @@ The Power Pulse backend is designed for the [Power Pulse](https://bogdanluckyman
 
 ## Table of Contents
 
-- [Frontend] (#frontend)
+- [Frontend](#frontend)
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Documentation](#documentation)
