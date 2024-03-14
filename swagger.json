@@ -283,19 +283,28 @@
           {
             "in": "query",
             "name": "title",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["langoustine", "Rose hip", "Cheese Arla Natura Light", "sangria"]
+            },
             "description": "Search product by title"
           },
           {
             "in": "query",
             "name": "category",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["fish","berries", "dairy", "alcoholic drinks"]
+            },
             "description": "Categoris type from list"
           },
           {
             "in": "query",
             "name": "filter",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["all", "recomended", "not-recomended"]
+            },
             "description": "Recomended or not recomended products filter"
           }
         ],
@@ -334,7 +343,10 @@
           {
             "in": "path",
             "name":"query",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["chest", "body weight", "delts"]
+            },
             "description": "Search exercise by category name"
           }
         ],
@@ -373,7 +385,10 @@
           {
             "in": "path",
             "name":"query",
-            "type": "string",
+            "schema":{
+              "type": "string",
+              "enum":["body parts", "equipment", "muscles"]
+            },
             "description": "Filter title for exercises list"
           }
         ],
@@ -776,19 +791,15 @@
         "example": {
           "user": {
             "name": "name",
-            "email": "test@test.com",
-            "dailyActivity": 110,
-            "height": 180,
-            "currentWeight": 70,
-            "desiredWeight": 60,
-            "birthday": "2005-01-11T00:00:00.000Z",
-            "blood": 1,
-            "sex": "male",
-            "levelActivity": 1,
-            "avatarURL": "https://res.cloudinary.com/durrb9z9q/image/upload/v1709993513/avatars/65eb63106e294ebc0dc61ae2.jpg",
-            "bmr": 2200
+            "email": "user@example.com",
+            "height": 0,
+            "currentWeight": 0,
+            "desiredWeight": 0,
+            "avatarURL": null,
+            "dailyActivity": 0,
+            "bmr": 0
           },
-          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWI2MzEwNmUyOTRlYmMwZGM2MWFlMiIsImlhdCI6MTcwOTk5MzMyOSwiZXhwIjoxNzEwMDc2MTI5fQ.Ng7K8CwCRsexPGSmbPSUYwPKIVGQTyFMlM8455kv7Wo"
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWYyNWJiODdjMjkxNjFhNDRkNzk4NiIsImlhdCI6MTcxMDI4Nzc4MiwiZXhwIjoxNzEwMzcwNTgyfQ.TCs8zJ4rOzj88rFb2qbuouatHIEu9Ey_J3qrT99mZ1I"
         }
       },
       "addExerciseRequest": {

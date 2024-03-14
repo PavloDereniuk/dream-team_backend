@@ -1,8 +1,7 @@
 import { Schema, model } from "mongoose";
 import { handleMongooseError } from "../helpers/handleMongooseError.js";
 import Joi from "joi";
-
-const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+import { emailRegex } from "../helpers/patterns.js";
 
 const userSchema = new Schema(
   {
@@ -87,12 +86,20 @@ const userSchema = new Schema(
 
 const registerSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().pattern(emailRegex).required(),
+  email: Joi.string().pattern(emailRegex).required().messages({
+    "string.base": "The email must be a string.",
+    "any.required": "email field is required.",
+    "string.emailRegex.base": "The email must be in format test@gmail.com.",
+  }),
   password: Joi.string().min(6).required(),
 });
 
 const loginSchema = Joi.object({
-  email: Joi.string().pattern(emailRegex).required(),
+  email: Joi.string().pattern(emailRegex).required().messages({
+    "string.base": "The email must be a string.",
+    "any.required": "email field is required.",
+    "string.emailRegex.base": "The email must be in format test@gmail.com.",
+  }),
   password: Joi.string().min(6).required(),
 });
 
