@@ -1,10 +1,8 @@
 import { Schema, model } from "mongoose";
 import Joi from "joi";
+import { dateRegex } from "../helpers/patterns.js";
 import { handleMongooseError } from "../helpers/handleMongooseError.js";
 import { parse, isValid, format } from "date-fns";
-
-
-const dateRegex = /^(\d{2})-(\d{2})-(\d{4})$/;
 
 const addProductSchema = Joi.object({
   date: Joi.string().required().pattern(dateRegex).messages({
