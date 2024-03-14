@@ -1,17 +1,14 @@
 import { Diary } from "../../models/diary.js";
 import { HttpError } from "../../helpers/HttpError.js";
-import mongoose from "mongoose";
 
 export const delDiaryProduct = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
 
-  const idToRemove = new mongoose.Types.ObjectId(id);
-
   const result = await Diary.findOne({ owner, "products._id": id });
 
   if (!result) {
-    throw HttpError(404, "id not exist");
+    throw HttpError(404, "Product not found in diary");
   }
   const { products } = result;
 
@@ -19,27 +16,22 @@ export const delDiaryProduct = async (req, res) => {
     return arr.find((obj) => obj._id.toString() === id.toString());
   };
 
-  const targetId = id;
-
-  const targetObject = findObjectById(products, targetId);
+  const targetObject = findObjectById(products, id);
 
   const calories = targetObject ? targetObject.calories : 0;
 
-  const diaryEntry = await Diary.findOneAndUpdate(
+  await Diary.findOneAndUpdate(
     {
       owner,
-      "products._id": idToRemove,
+      "products._id": id,
     },
     {
       $inc: { consumedCalories: -calories },
       $pull: {
-        products: { _id: idToRemove },
+        products: { _id: id },
       },
-    },
-    { new: true }
+    }
   );
-
-  if (!diaryEntry) throw HttpError(404, "Product not found in diary");
 
   res.status(200).json({ message: "Product deleted from diary successfully" });
 };
