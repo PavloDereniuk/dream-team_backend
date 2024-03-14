@@ -5,7 +5,6 @@ export const addExercise = async (req, res, next) => {
     date,
     exercises: { exerciseID, time, calories },
   } = req.body;
-  console.log(req.body);
   const { _id: owner } = req.user;
 
   try {
