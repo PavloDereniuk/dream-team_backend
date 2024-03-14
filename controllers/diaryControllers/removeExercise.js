@@ -8,7 +8,12 @@ export const delDiaryExercises = async (req, res) => {
 
   const idToRemove = new mongoose.Types.ObjectId(id);
 
-  const { exercises } = await Diary.findOne({ owner, "exercises._id": id });
+  const result = await Diary.findOne({ owner, "exercises._id": id });
+
+  if (!result) {
+    throw HttpError(404, "id not exist");
+  }
+  const { exercises } = result;
 
   const findObjectById = (arr, id) => {
     return arr.find((obj) => obj._id.toString() === id.toString());

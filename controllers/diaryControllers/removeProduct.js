@@ -8,7 +8,12 @@ export const delDiaryProduct = async (req, res) => {
 
   const idToRemove = new mongoose.Types.ObjectId(id);
 
-  const { products } = await Diary.findOne({ owner, "products._id": id });
+  const result = await Diary.findOne({ owner, "products._id": id });
+
+  if (!result) {
+    throw HttpError(404, "id not exist");
+  }
+  const { products } = result;
 
   const findObjectById = (arr, id) => {
     return arr.find((obj) => obj._id.toString() === id.toString());
