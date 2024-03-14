@@ -12,4 +12,14 @@ const validateBody = (schema) => {
   return func;
 };
 
-export { validateBody };
+const validateParams = (schema) => {
+  const func = (req, _, next) => {
+    const { error } = schema.validate(req.params);
+    if (error) next(HttpError(400, error.message));
+    next();
+  };
+  return func;
+};
+
+
+export { validateBody, validateParams };
